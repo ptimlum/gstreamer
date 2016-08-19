@@ -25,10 +25,11 @@ Customize the attributes to suit site specific conventions and defaults.
 * `node['gstreamer']['bundle_type']` - *tar.xz* default, earlier versions included bundles for both *tar.gz* and *tar.bz2*
 * `node['gstreamer']['prefix']` - install prefix, default is */usr/local* so the library files would be installed into */usr/local/lib/gstreamer-1.0* this would also require application alter their PKG_CONFIG_PATH to include */usr/local/lib/pkgconfig*. (setting this to */usr* would be the lazy way for application to discover the built libraries)
 * `node['gstreamer']['configure_opts']` - these are the commandline option overrides as a hash table to be passed to autoconf/configure, with *prefix* and *with-pkg-config-path* using the `node['gstreamer']['prefix']` attribute value/
+* `node['gstreamer']['relative_path]` - this to download from #{src_url}/#{relative_path}/#{package_name}-#{version}.#{bundle_type} (since I'm lazy, I predownload the source tarball to a single directory and set *relative_path* to ''. This is so one might specify local download as something src_url = 'file///tmp/mydownloads')
 * `node['gstreamer']['depends']` - extra (yum) packages required for building.
 * `node['gstreamer']['packages']` - hash of modules with the package name matching the tarball, default behavior is to download #{src_url}/#{package_name}/#{package_name}-#{version}.#{bundle_type} . This was created to expandable to so that one might build and install other components not listed in the default attributes. (mp3's playback apparently additionally requires gst-plugins-ugly, gst-plugins-bag and gst-libav)
-* `install` - true/false, default is the minimal confige of gstreamer, gst-plugins-base, gst-plugins-good (these are available from the base distros repos as yum/rpm packages)
-* `relative_path` - this to download from #{src_url}/#{relative_path}/#{package_name}-#{version}.#{bundle_type} (since I'm lazy, I predownload the source tarball to a single directory and set *relative_path* to '')
+** `install` - true/false, default is the minimal confige of gstreamer, gst-plugins-base, gst-plugins-good (these are available from the base distros repos as yum/rpm packages)
+
 
 ## Tested
 Fedora 17/21
