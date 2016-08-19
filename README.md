@@ -29,11 +29,13 @@ Customize the attributes to suit site specific conventions and defaults.
 * `node['gstreamer']['depends']` - extra (yum) packages required for building.
 * `node['gstreamer']['packages']` - hash of modules with the package name matching the tarball, default behavior is to download #{src_url}/#{package_name}/#{package_name}-#{version}.#{bundle_type} . This was created to expandable to so that one might build and install other components not listed in the default attributes. (mp3's playback apparently additionally requires gst-plugins-ugly, gst-plugins-bag and gst-libav)
     * `install` - true/false, default is the minimal confige of gstreamer, gst-plugins-base, gst-plugins-good (these are available from the base distros repos as yum/rpm packages)
-
+    * `version` - override version to install if different from `node['gstreamer']['version']`
+    * `url` - override url of source tarball to install
+    * `autoconf_opts` - override array of options pass to ark -- configure command line flags, but default generated from the `node['gstreamer']['configure_opt']` key pair hash 
 
 ## Tested
-Fedora 17/21
-Centos 7
+* Fedora 17/21
+* Centos 7
 
 ## Does not work out of the box
 The default setting for this cookbook is no better (maybe worse) than installing gstreamer from the centos yum repos. The default settings will only build and deploy gstreamer, and the base + good plugins, which are already available as pre-compiled rpm packages.
@@ -65,7 +67,7 @@ If everything worked out
 yum install bansheee
 ```
 
-should all one to listen to your personal mp3 library without adding additional repository sources ... which is all that I was after.
+should allow one to listen to your personal mp3 library without adding additional repository sources ... which is all that I was after.
 
 (... and I just like to be able to build things from source even if I'm not actively modifying the code)
 
