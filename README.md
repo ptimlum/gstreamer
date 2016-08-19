@@ -31,7 +31,7 @@ Customize the attributes to suit site specific conventions and defaults.
     * `install` - true/false, default is the minimal confige of gstreamer, gst-plugins-base, gst-plugins-good (these are available from the base distros repos as yum/rpm packages)
     * `version` - override version to install if different from `node['gstreamer']['version']`
     * `url` - override url of source tarball to install
-    * `autoconf_opts` - override array of options pass to ark -- configure command line flags, but default generated from the `node['gstreamer']['configure_opt']` key pair hash 
+    * `autoconf_opts` - override array of options pass to ark -- *configure* command line flags, by default generated from the `node['gstreamer']['configure_opt']` key pair hash 
 
 ## Tested
 * Fedora 17/21
