@@ -1,0 +1,10 @@
+name             'gstreamer'
+maintainer       'Tim Lum'
+maintainer_email 'YOUR_EMAIL'
+license          'GNU Public License 3.0'
+description      'Installs/Configures gstreamer'
+long_description 'Installs/Configures gstreamer'
+version          '0.2.0'
+
+depends 'ark'
+depends 'build-essential'
