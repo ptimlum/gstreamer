@@ -5,13 +5,14 @@ default['gstreamer']['src_url'] =       'https://gstreamer.freedesktop.org/src'
 default['gstreamer']['version'] =       '1.8.1'
 
 # use the package name unless a relative path from the src_url is specified
-default['gstreamer']['relative_path'] = false
+default['gstreamer']['relative_path'] = nil
 
 # older archives may be in tar.gz and tar.bz2
 default['gstreamer']['bundle_type'] =   'tar.xz'
 default['gstreamer']['download_dir'] =  Chef::Config[:file_cache_path]
 
 default['gstreamer']['depends'] = [
+    'libtool',
     'glib2-devel',
     'zlib-devel',
     'gettext-devel',
@@ -21,7 +22,8 @@ default['gstreamer']['depends'] = [
   ]
 
 default['gstreamer']['automake']['version'] = '1.15'
-default['gstreamer']['automake']['url'] = "http://ftp.gnu.org/gnu/automake/automake-#{node.gstreamer.automake.version}.tar.gz"
+default['gstreamer']['automake']['package'] = "automake-#{node['gstreamer']['automake']['version']}.tar.gz"
+default['gstreamer']['automake']['url'] = "http://ftp.gnu.org/gnu/automake/#{node['gstreamer']['automake']['package']}"
 
 # assumes download path to be #{src_url}/#{package_name}/#{package_name}-#{version}.#{bundle_type}
 default['gstreamer']['packages'] = {
@@ -85,7 +87,7 @@ node['gstreamer']['packages'].each do |gs_package,package_opts|
   unless package_opts.has_key?('url')
     default['gstreamer']['packages'][gs_package]['url'] = File.join( 
       node['gstreamer']['src_url'], 
-      node['gstreamer']['relative_path'] ? node['gstreamer']['relative_path'] : gs_package, 
+      node['gstreamer']['relative_path'] || gs_package, 
       "#{gs_package}-#{node['gstreamer']['version']}.#{node['gstreamer']['bundle_type']}" 
     )
   end
